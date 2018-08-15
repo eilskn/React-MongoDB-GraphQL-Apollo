@@ -1,0 +1,48 @@
+{
+  "name": "fullstack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server-express": "^2.0.0",
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "graphql": "^0.13.2",
+    "graphql-tools": "^3.1.1",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.7",
+    "protobufjs": "^6.8.8"
+  },
+  "scripts": {
+    "server": "nodemon server.js",
+    "client": "cd client && yarn start",
+    "dev": "concurrently --names \"server,client\" \"yarn server --silent\" \"yarn client --silent\""
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb"
+    ],
+    "rules": {
+      "no-param-reassign": [
+        "error",
+        {
+          "props": false
+        }
+      ]
+    },
+    "env": {}
+  }
+}
