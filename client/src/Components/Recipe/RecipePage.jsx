@@ -17,7 +17,7 @@ const RecipePage = ({ match: { params } }) => {
             <p>Description: {data.getRecipe.description}</p>
             <p>Instructions: {data.getRecipe.instructions}</p>
             <p>Likes: {data.getRecipe.likes}</p>
-            <p>Created by: {data.getRecipe.username}</p>
+            <p>Created by: {data.getRecipe.username || 'Anonimus'}</p>
             <button>Like</button>
           </div>
         );

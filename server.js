@@ -14,7 +14,7 @@ require('dotenv').config();
 mongoose
   .connect(
     process.env.MONGO_URI,
-    { useNewUrlParser: true },
+    { useNewUrlParser: true }
   )
   .then(() => console.log('Monogo connected'))
   .catch(e => console.error(e));
@@ -23,8 +23,8 @@ const PORT = process.env.PORT || 3001;
 
 const playground = {
   settings: {
-    'editor.cursorShape': 'line',
-  },
+    'editor.cursorShape': 'line'
+  }
 };
 
 const server = new ApolloServer({
@@ -34,13 +34,12 @@ const server = new ApolloServer({
   context: ({ req: { currentUser } }) => ({
     User,
     Recipe,
-    currentUser,
+    currentUser
   }),
-  playground,
+  playground
 });
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
 /* authorization middleware */
 app.use(async (req, res, next) => {
@@ -59,6 +58,10 @@ app.use(async (req, res, next) => {
 server.applyMiddleware({
   app,
   bodyParserConfig: bodyParser.json(),
+  cors: {
+    credentials: true,
+    origin: 'http://localhost:3000'
+  }
 });
 
 app.listen(PORT, () => {
