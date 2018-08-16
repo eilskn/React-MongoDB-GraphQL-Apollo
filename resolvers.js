@@ -14,34 +14,40 @@ exports.resolvers = {
       return allRecipes;
     },
 
+    getRecipe: async (root, { _id }, { Recipe }) => {
+      const recipe = await Recipe.findOne({ _id });
+
+      return recipe;
+    },
+
     getCurrentUser: async (root, args, { currentUser, User }) => {
       if (!currentUser) {
         return null;
       }
 
-      const user = await User.findOne({ username: currentUser.username }).populate({
+      const user = await User.findOne({
+        username: currentUser.username
+      }).populate({
         path: 'favorites',
-        model: 'Recipe',
+        model: 'Recipe'
       });
 
       return user;
-    },
+    }
   },
 
   Mutation: {
     addRecipe: async (
       root,
-      {
-        name, description, category, instructions, username,
-      },
-      { Recipe },
+      { name, description, category, instructions, username },
+      { Recipe }
     ) => {
       const newRecipe = await new Recipe({
         name,
         description,
         category,
         instructions,
-        username,
+        username
       }).save();
       return newRecipe;
     },
@@ -70,10 +76,10 @@ exports.resolvers = {
       const newUser = await new User({
         username,
         email,
-        password,
+        password
       }).save();
 
       return { token: createToken(newUser, process.env.SECRET, '1hr') };
-    },
-  },
+    }
+  }
 };
