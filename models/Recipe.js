@@ -5,31 +5,35 @@ const { Schema } = mongoose;
 const RecipeSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   category: {
     type: String,
-    required: true,
+    required: true
   },
   description: {
     type: String,
-    required: true,
+    required: true
   },
   instructions: {
     type: String,
-    required: true,
+    required: true
   },
   createdDate: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   likes: {
     type: Number,
-    default: 0,
+    default: 0
   },
   username: {
-    type: String,
-  },
+    type: String
+  }
+});
+
+RecipeSchema.index({
+  '$**': 'text'
 });
 
 module.exports = mongoose.model('Recipe', RecipeSchema);
