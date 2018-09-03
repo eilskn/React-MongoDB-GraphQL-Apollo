@@ -26,6 +26,7 @@ exports.typeDefs = gql`
     getRecipe(_id: ID!): Recipe
     searchRecipes(searchTerm: String): [Recipe]
     getCurrentUser: User
+    getUserRecipes(username: String!): [Recipe]
   }
 
   type Token {
@@ -40,6 +41,12 @@ exports.typeDefs = gql`
       instructions: String!
       username: String
     ): Recipe
+
+    likeRecipe(_id: ID, username: String!): Recipe
+
+    unlikeRecipe(_id: ID, username: String!): Recipe
+
+    deleteUserRecipe(_id: ID): Recipe
 
     signinUser(username: String!, password: String!): Token
     signupUser(username: String!, email: String!, password: String): Token

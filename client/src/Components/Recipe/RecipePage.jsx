@@ -2,6 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 import { GET_RECIPE } from '../../queries';
+import LikeRecipe from './LikeRecipe';
 
 const RecipePage = ({ match: { params } }) => {
   const { _id } = params;
@@ -18,7 +19,7 @@ const RecipePage = ({ match: { params } }) => {
             <p>Instructions: {data.getRecipe.instructions}</p>
             <p>Likes: {data.getRecipe.likes}</p>
             <p>Created by: {data.getRecipe.username || 'Anonimus'}</p>
-            <button>Like</button>
+            <LikeRecipe _id={_id} />
           </div>
         );
       }}

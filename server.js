@@ -16,7 +16,7 @@ mongoose
     process.env.MONGO_URI,
     { useNewUrlParser: true }
   )
-  .then(() => console.log('Monogo connected'))
+  .then(() => console.log('Mongo connected'))
   .catch(e => console.error(e));
 
 const PORT = process.env.PORT || 3001;

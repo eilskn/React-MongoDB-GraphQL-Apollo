@@ -63,6 +63,32 @@ export const ADD_RECIPE = gql`
   }
 `;
 
+export const DELETE_USER_RECIPE = gql`
+  mutation($_id: ID!) {
+    deleteUserRecipe(_id: $_id) {
+      _id
+    }
+  }
+`;
+
+export const LIKE_RECIPE = gql`
+  mutation($_id: ID!, $username: String!) {
+    likeRecipe(_id: $_id, username: $username) {
+      _id
+      likes
+    }
+  }
+`;
+
+export const UNLIKE_RECIPE = gql`
+  mutation($_id: ID!, $username: String!) {
+    unlikeRecipe(_id: $_id, username: $username) {
+      _id
+      likes
+    }
+  }
+`;
+
 /* User Query */
 export const GET_CURRENT_USER = gql`
   query {
@@ -70,6 +96,20 @@ export const GET_CURRENT_USER = gql`
       username
       email
       joinDate
+      favorites {
+        _id
+        name
+      }
+    }
+  }
+`;
+
+export const GET_USER_RECIPES = gql`
+  query($username: String!) {
+    getUserRecipes(username: $username) {
+      _id
+      name
+      likes
     }
   }
 `;

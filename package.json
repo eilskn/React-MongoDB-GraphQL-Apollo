@@ -25,12 +25,15 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "concurrently": "^4.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0"
+    "eslint-plugin-react": "^7.10.0",
+    "nodemon": "^1.18.4",
+    "prettier": "^1.14.2"
   },
   "eslintConfig": {
     "extends": [
