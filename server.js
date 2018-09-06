@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express');
-const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
 const User = require('./models/User');
@@ -16,7 +15,7 @@ mongoose
     process.env.MONGO_URI,
     { useNewUrlParser: true }
   )
-  .then(() => console.log('Mongo connected'))
+  .then(() => 'Mongo connected')
   .catch(e => console.error(e));
 
 const PORT = process.env.PORT || 3001;
@@ -64,6 +63,4 @@ server.applyMiddleware({
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`PORT on ${PORT} and ${server.graphqlPath}`);
-});
+app.listen(PORT, () => `PORT on ${PORT} and ${server.graphqlPath}`);

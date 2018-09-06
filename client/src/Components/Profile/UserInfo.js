@@ -8,7 +8,7 @@ const formatDate = date => {
 };
 
 const UserInfo = ({ session }) => {
-  console.log(session);
+  (session);
   return (
     <div>
       <h3>User info</h3>

@@ -13,7 +13,7 @@ const handleDelete = deleteUserRecipe => {
   const confirmDelete = window.confirm('Are u sure?');
   if (confirmDelete) {
     deleteUserRecipe().then(({ data }) => {
-      console.log(data);
+      (data);
     });
   }
 };

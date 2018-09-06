@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
+import CKEditor from 'react-ckeditor-component';
+
 import { ADD_RECIPE, GET_ALL_RECIPES, GET_USER_RECIPES } from '../../queries';
 import withAuth from '../withAuth';
 
@@ -20,6 +22,13 @@ class AddRecipe extends Component {
     e.preventDefault();
     addRecipe().then(() => {
       this.props.history.push('/');
+    });
+  };
+
+  handleEditorChange = e => {
+    const newContent = e.editor.getData();
+    this.setState({
+      inputsValue: { ...this.state.inputsValue, instructions: newContent }
     });
   };
 
@@ -82,12 +91,12 @@ class AddRecipe extends Component {
                   placeholder="Description"
                 />
 
-                <textarea
-                  onChange={this.handleChange}
-                  placeholder="Instructions"
+                <CKEditor
+                  events={{ change: this.handleEditorChange }}
                   name="instructions"
-                  id="instructions"
+                  content={instructions}
                 />
+
                 <button type="submit" className="button-primary">
                   Submit
                 </button>
