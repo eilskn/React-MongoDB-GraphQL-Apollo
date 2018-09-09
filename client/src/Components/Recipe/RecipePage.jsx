@@ -9,7 +9,7 @@ const RecipePage = ({ match: { params } }) => {
 
   return (
     <Query query={GET_RECIPE} variables={{ _id }}>
-      {({ data, loading, error }) => {
+      {({ data, loading }) => {
         if (loading) return <div>Loading...</div>;
         return (
           <div className="App">
@@ -26,7 +26,7 @@ const RecipePage = ({ match: { params } }) => {
             </p>
             <p>Likes: {data.getRecipe.likes}</p>
             <p>Created by: {data.getRecipe.username || 'Anonimus'}</p>
-            <LikeRecipe _id={_id} />
+            <LikeRecipe likes={data.getRecipe.likes} _id={_id} />
           </div>
         );
       }}

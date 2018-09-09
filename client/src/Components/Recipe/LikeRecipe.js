@@ -26,24 +26,16 @@ class LikeRecipe extends Component {
 
   handleClick = (likeRecipe, unlikeRecipe) => {
     this.setState(
-      state => ({
-        liked: !state.liked
-      }),
+      state => ({ liked: !state.liked }),
       () => this.handleLike(likeRecipe, unlikeRecipe)
     );
   };
 
   handleLike = (likeRecipe, unlikeRecipe) => {
     if (this.state.liked) {
-      likeRecipe().then(async ({ data }) => {
-        (data);
-        await this.props.refetch();
-      });
+      likeRecipe().then(() => this.props.refetch());
     } else {
-      unlikeRecipe().then(async ({ data }) => {
-        (data);
-        await this.props.refetch();
-      });
+      unlikeRecipe().then(() => this.props.refetch());
     }
   };
 
@@ -53,7 +45,6 @@ class LikeRecipe extends Component {
       query: GET_RECIPE,
       variables: { _id }
     });
-
     cache.writeQuery({
       query: GET_RECIPE,
       variables: { _id },
@@ -69,7 +60,6 @@ class LikeRecipe extends Component {
       query: GET_RECIPE,
       variables: { _id }
     });
-
     cache.writeQuery({
       query: GET_RECIPE,
       variables: { _id },
@@ -81,18 +71,34 @@ class LikeRecipe extends Component {
 
   render() {
     const { username, liked } = this.state;
-    const { _id } = this.props;
+    const { _id, likes } = this.props;
     return username ? (
       <Mutation
         update={this.updateUnlike}
         mutation={UNLIKE_RECIPE}
         variables={{ _id, username }}
+        optimisticResponse={{
+          __typename: 'Mutation',
+          unlikeRecipe: {
+            __typename: 'Recipe',
+            likes: likes,
+            _id
+          }
+        }}
       >
         {unlikeRecipe => (
           <Mutation
             update={this.updateLike}
             mutation={LIKE_RECIPE}
             variables={{ _id, username }}
+            optimisticResponse={{
+              __typename: 'Mutation',
+              likeRecipe: {
+                __typename: 'Recipe',
+                likes: likes,
+                _id
+              }
+            }}
           >
             {likeRecipe => {
               return (
